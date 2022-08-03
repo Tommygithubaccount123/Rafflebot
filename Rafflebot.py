@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 
 import time, logging
 
@@ -18,17 +19,16 @@ time.sleep(1)
 
 #browser.find_element_by_xpath('//body').send_keys(Keys.END)
 
-
 rafflesfailedtojoin=[]
 rafflesentered=[]
 def raffletry(number):
     xpath='//*[@id="raffles-list"]/div['+str(number)+']/div[1]/div[1]/a'
     try:
-        raffle=browser.find_element_by_xpath(xpath)
+        raffle=browser.find_element(By.XPATH,xpath)
         raffle.click()
         time.sleep(1)
         try:
-            enterraffle=browser.find_element_by_xpath('//*[@id="main-container"]/div/div[2]/div[5]/div[2]/button[2]')
+            enterraffle=browser.find_element(By.XPATH,'//*[@id="main-container"]/div/div[2]/div[5]/div[2]/button[2]')
             enterraffle.click()
             print('Entered raffle '+str(number))
             logging.info('Entered raffle '+str(number))
@@ -37,7 +37,7 @@ def raffletry(number):
             time.sleep(1)
         except:
             try:
-                enterraffle=browser.find_element_by_xpath('//*[@id="main-container"]/div/div[2]/div[7]/div[2]/button[2]') 
+                enterraffle=browser.find_element(By.XPATH,'//*[@id="main-container"]/div/div[2]/div[7]/div[2]/button[2]') 
                 enterraffle.click()
                 print('Entered raffle '+str(number))
                 logging.info('Entered raffle '+str(number))
@@ -58,13 +58,13 @@ def raffletry(number):
         time.sleep(1)
 
 
-def getnumberofrafflesavailable():
-    thenumber=browser.find_element_by_xpath('//*[@id="main-container"]/div[2]/div[2]/div/div[1]/h1').text
-    print(thenumber)
-    for x in range(len(thenumber)):
-        if thenumber[x]=='/':
-            thenumber=thenumber[(x+1):len(thenumber)]
-            return thenumber
+#def getnumberofrafflesavailable():
+    #thenumber=(browser.find_element_by_xpath('//*[@id="main-container"]/div[2]/div[2]/div/div[1]/h1')).text
+    # print(thenumber)
+    # for x in range(len(thenumber)):
+    #     if thenumber[x]=='/':
+    #         thenumber=thenumber[(x+1):len(thenumber)]
+    #         return thenumber
 
 def failedrafflestopper():
     if len(rafflesfailedtojoin)==2:
@@ -82,7 +82,7 @@ def countenterredraffles():
     for i in rafflesentered:
         total=total+i
     return total
-y=getnumberofrafflesavailable()
+y="100" #getnumberofrafflesavailable()
 print(y+' number of raffles')
 logging.info(y+' number of raffles')  
 numberofraffles=1
