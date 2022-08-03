@@ -58,13 +58,13 @@ def raffletry(number):
         time.sleep(1)
 
 
-#def getnumberofrafflesavailable():
-    #thenumber=(browser.find_element_by_xpath('//*[@id="main-container"]/div[2]/div[2]/div/div[1]/h1')).text
-    # print(thenumber)
-    # for x in range(len(thenumber)):
-    #     if thenumber[x]=='/':
-    #         thenumber=thenumber[(x+1):len(thenumber)]
-    #         return thenumber
+def getnumberofrafflesavailable():
+    thenumber=(browser.find_element(By.XPATH,'//*[@id="main-container"]/div[2]/div[2]/div/div[1]/h1')).text
+    print(thenumber)
+    for x in range(len(thenumber)):
+        if thenumber[x]=='/':
+            thenumber=thenumber[(x+1):len(thenumber)]
+            return thenumber
 
 def failedrafflestopper():
     if len(rafflesfailedtojoin)==2:
@@ -82,7 +82,7 @@ def countenterredraffles():
     for i in rafflesentered:
         total=total+i
     return total
-y="100" #getnumberofrafflesavailable()
+y=getnumberofrafflesavailable()
 print(y+' number of raffles')
 logging.info(y+' number of raffles')  
 numberofraffles=1
@@ -91,6 +91,6 @@ numberofraffles=1
 
 while numberofraffles<int(y) and failedrafflestopper()==1:
     raffletry(numberofraffles)
-    numberofraffles=numberofraffles+1
+    numberofraffles += 1
 print('%d raffles entered' % countenterredraffles())
 logging.info('%d raffles entered' % countenterredraffles())
